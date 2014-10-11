@@ -1,3 +1,5 @@
+package array.bounded.queue;
+
 public class BoundedQueue
 {
     int maxSize;
@@ -41,6 +43,8 @@ public class BoundedQueue
     
     public int dequeue()
     {
+        int num = values[front];
+        
         if(front == maxSize-1)
         {
             front = 0;
@@ -49,17 +53,33 @@ public class BoundedQueue
         {
             front++;
         }
-        return values[nElements--];
+        
+        nElements--;
+        
+        return num;
     }
     
-    @Override
     public String toString()
     {
         String output = "maxSize: " + maxSize + " nElements: " + nElements + " Queue: ";
-        for(int i = front; front < back + 1; i++)
+        if(nElements > 0)
         {
-            output += values[i] + " ";
+            int i = front;
+            do
+            {
+                output += values[i] + " ";
+                if(i == maxSize - 1)
+                {
+                    i = 0;
+                }
+                else
+                {
+                    i++;
+                }
+                
+            }while(i != back);
         }
+
         output += "\n";
         return output;
     }
