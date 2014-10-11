@@ -1,4 +1,3 @@
-package array.bounded.queue;
 
 public class BoundedQueue
 {
