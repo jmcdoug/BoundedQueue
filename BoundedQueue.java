@@ -1,12 +1,24 @@
+/**
+ * BoundedQueue.java
+ * Implementation of an bounded queue for storing integers using arrays 
+ *
+ * 
+ * @author John McDougall
+ * @version 2014/10/11
+ */
 
 public class BoundedQueue
 {
-    int maxSize;
-    int nElements;
-    int[] values;
-    int front;
-    int back;
+    private int maxSize;
+    private int nElements;
+    private int[] values;
+    private int front;
+    private int back;
     
+    /**
+     * Constructor
+     * @param size - max size of bounded queue 
+     */
     public BoundedQueue(int size)
     {
         maxSize = size;
@@ -16,6 +28,20 @@ public class BoundedQueue
         values = new int[size]; 
     }
     
+    /**
+     * getNElements
+     * @return - number of elements in the queue
+     */
+    public int getNElements()
+    {
+        return nElements;
+    }
+    
+    /**
+     * enqueue
+     * @param newEntry - Value of integer to be added to the back of the queue
+     * @return  Returns 0 if the queue is already at maximum size and 1 on success 
+     */
     public int enqueue(int newEntry)
     {
         if(nElements == maxSize)
@@ -40,8 +66,17 @@ public class BoundedQueue
         }
     }
     
+    /**
+     * dequeue
+     * @return - The value of the removed entry. If there are no entries returns integer MIN_VALUE
+     */
     public int dequeue()
     {
+        if(nElements == 0)
+        {
+            return Integer.MIN_VALUE;
+        }
+        
         int num = values[front];
         
         if(front == maxSize-1)
@@ -58,6 +93,10 @@ public class BoundedQueue
         return num;
     }
     
+    /**
+     * to string 
+     * @return - The queue as a string
+     */
     public String toString()
     {
         String output = "maxSize: " + maxSize + " nElements: " + nElements + " Queue: ";
@@ -79,7 +118,6 @@ public class BoundedQueue
             }while(i != back);
         }
 
-        output += "\n";
         return output;
     }
 }
